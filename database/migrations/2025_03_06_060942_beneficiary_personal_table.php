@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -273,19 +274,19 @@ DB::statement("CREATE TABLE public.beneficiary_personals_garbage_19 PARTITION OF
 FOR VALUES IN ('2')");
 
 DB::statement("CREATE TABLE public.beneficiary_personals_rejected_19 PARTITION OF public.beneficiary_personals_19
-FOR VALUES IN ('10')"); 
+FOR VALUES IN ('10')");
  DB::statement("ALTER TABLE public.beneficiary_personals ADD CONSTRAINT fk_beneficiary_personals_serial FOREIGN KEY (ben_id)
     REFERENCES public.beneficiary_idserials (id) MATCH SIMPLE
     ON UPDATE NO ACTION
-    ON DELETE NO ACTION"); 
+    ON DELETE NO ACTION");
 DB::statement("ALTER TABLE public.beneficiary_personals ADD CONSTRAINT fk_beneficiary_personals_district FOREIGN KEY (district_id)
      REFERENCES public.districts (id) MATCH SIMPLE
      ON UPDATE NO ACTION
-     ON DELETE NO ACTION"); 
+     ON DELETE NO ACTION");
 DB::statement("ALTER TABLE public.beneficiary_personals ADD CONSTRAINT fk_beneficiary_personals_subdivision FOREIGN KEY (sub_division_id)
      REFERENCES public.subdivisions (id) MATCH SIMPLE
      ON UPDATE NO ACTION
-     ON DELETE NO ACTION"); 
+     ON DELETE NO ACTION");
 DB::statement("ALTER TABLE public.beneficiary_personals ADD CONSTRAINT fk_beneficiary_personals_block FOREIGN KEY (block_id)
      REFERENCES public.blocks (id) MATCH SIMPLE
      ON UPDATE NO ACTION
