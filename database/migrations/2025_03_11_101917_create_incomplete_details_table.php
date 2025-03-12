@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('ben_incomplete_details', function (Blueprint $table) {
             $table->id();
-            $table->integer('ben_id')->nullable();
+            $table->unsignedInteger('ben_id')->nullable();
             $table->unsignedSmallInteger('incomplete_type')->nullable();
             $table->foreign('ben_id')->references('ben_id')->on('beneficiary_personals')->name('ben_id_fk');
             $table->foreign('incomplete_type')->references('id')->on('codemasters')->name('incomplete_type_fk');
