@@ -23,8 +23,8 @@ class ApplicantSeeder extends Seeder
         ]);
         BeneficiaryPersonal::create([
             'ben_id' => $BeneficiaryIdserial->id,
-            'full_name' => 'Shubhadeep Ray',
-            'dob' => '1997-11-21',
+            'full_name' => 'Ramu Ray',
+            'dob' => '2000-01-01',
             'caste' => '16',
             'next_level_role_id' => '1',
             'scheme_id' => '10',
@@ -32,34 +32,49 @@ class ApplicantSeeder extends Seeder
             'marital_status' => '21',
             'gender' => '28',
             'district_id' => '318',
-            'block_id' => '2525',
+            'block_id' => '2974',
         ]);
         BeneficiaryAadhaar::create([
             'ben_id' => $BeneficiaryIdserial->id,
-            'encode_key' => 'base64:ADL3GVU6scyXWbSbUSiTwMyMl7639jh3K3hI1e7GIMY=',
-            'encoded_aadhar' => Crypt::encrypt(469784745472),
+            'encode_key' => 'ADL3GVU6scyXWbSbUSiTwMyMl7639jh3K3hI1e7GIMY=',
+            'encoded_aadhar' => Crypt::encrypt(value: '012345678901'),
             'scheme_id' => '10',
             'is_clean' => '1',
-            'aadhar_hash' => md5(469784745472),
+            'aadhar_hash' => md5('012345678901'),
         ]);
         BeneficiaryBank::create([
             'ben_id' => $BeneficiaryIdserial->id,
             'ifsc' => 'SBIN0009136',
-            'account_no' => '33466695384',
+            'account_no' => '01234567891',
             'scheme_id' => '10',
             'is_clean' => '1',
         ]);
-        BeneficiaryRelationship::create([
+        BeneficiaryIdentification::create([
             'ben_id' => $BeneficiaryIdserial->id,
-            'full_name' => 'Prokash Ray',
-            'relation_type_id' => '76',
+            'identification_type_id' => '44',
+            'identification_value' => '0123456789',
             'scheme_id' => '10',
         ]);
-        BeneficiaryRelationship::create([
+        BeneficiaryOther::create([
             'ben_id' => $BeneficiaryIdserial->id,
-            'full_name' => 'Kakali Ray',
-            'relation_type_id' => '77',
             'scheme_id' => '10',
         ]);
+        $beneficiaries = [
+            [
+                'ben_id' => $BeneficiaryIdserial->id,
+                'full_name' => 'Raju Ray',
+                'relation_type_id' => '76',
+                'scheme_id' => '10',
+            ],
+            [
+                'ben_id' => $BeneficiaryIdserial->id,
+                'full_name' => 'Rimi Ray',
+                'relation_type_id' => '77',
+                'scheme_id' => '10',
+            ],
+        ];
+        foreach ($beneficiaries as $beneficiary) {
+            BeneficiaryRelationship::create($beneficiary);
+        }
     }
 }

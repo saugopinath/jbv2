@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
             CodemasterSeeder::class, 
             BankSeeder::class, 
             IfscSeeder::class,
-            AdminSeeder::class,
         ]);
     }
 }
