@@ -17,7 +17,7 @@ class AdminSeeder extends Seeder
     {
         $user = User::create([
             'name' => 'Admin',
-            'mobile_no' => '7001892317',
+            'mobile_no' => '0123456789',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('1234'),
         ]);
