@@ -16,7 +16,7 @@ return new class extends Migration
 (
     id serial,
     ben_id integer,
-    encode_key character varying(20),
+    encode_key character varying(200),
     encoded_aadhar text,
     scheme_id smallint,
     is_clean smallint default 1,

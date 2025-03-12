@@ -26,6 +26,11 @@ class DatabaseSeeder extends Seeder
             CodemasterSeeder::class,
             BankSeeder::class,
             IfscSeeder::class,
+            DepartmentSeeder::class,
+            SchemeSeeder::class,
+            CodemasterSeeder::class,
+            BankSeeder::class,
+            IfscSeeder::class,
             AdminSeeder::class,
         ]);
     }
