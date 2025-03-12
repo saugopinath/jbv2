@@ -11,5 +11,8 @@ class IncompletDetails extends Page
     protected static ?string $navigationLabel = 'List Of Application';
     protected static ?string $navigationGroup = 'Incomplet Details';
 
+    protected static ?string $slug = 'incomplet-details';
+
+    protected static ?string $title = '';
     protected static string $view = 'filament.pages.incomplet-details';
 }
