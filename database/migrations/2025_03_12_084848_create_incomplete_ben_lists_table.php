@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('incomplete_ben_lists', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->unsignedSmallInteger('incomplete_type');
             $table->unsignedInteger('ben_id');
+            $table->unsignedSmallInteger('incomplete_type');
             $table->foreign('ben_id')->references('ben_id')->on('beneficiary_personals')->name('ben_id_fk');
+            $table->foreign('incomplete_type')->references('id')->on('codemasters')->name('incomplete_type_fk');
+            $table->timestamps();
         });
     }
 
