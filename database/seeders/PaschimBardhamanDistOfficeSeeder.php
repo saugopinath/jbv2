@@ -7,7 +7,7 @@ use App\Models\OfficeMaster;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PurbaBardhamanDistOfficeSeeder extends Seeder
+class PaschimBardhamanDistOfficeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,12 +15,14 @@ class PurbaBardhamanDistOfficeSeeder extends Seeder
     public function run(): void
     {
         OfficeMaster::create([
-            'name' => 'Purba Bardhaman Dist Office',
-            'address' => 'PurbaBardhaman,WesBengal',
-            'zip' => '713101',
+            'name' => 'Paschim Bardhaman Dist Office',
+            'address' => 'PaschimBardhaman,WesBengal',
+            'zip' => '713422',
             'office_type' => Codemaster::where('short_name', 'district_office')->firstOrFail()->id,
             'state_id' => '19',
-            'district_id' => '306', 
+            'district_id' => '704',
+            
+            
         ]);
     }
 }
