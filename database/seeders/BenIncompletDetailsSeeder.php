@@ -17,7 +17,7 @@ class BenIncompletDetailsSeeder extends Seeder
 
         $benIncompletDetails = [
             [
-                'ben_id' => '1',
+                // 'ben_id' => '1',
                 'incomplet_type' => '82',
             ],
         ];
