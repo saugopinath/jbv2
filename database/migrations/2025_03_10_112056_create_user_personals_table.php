@@ -21,7 +21,11 @@ return new class extends Migration
             $table->foreign('department_id')->references('id')->on('departments')->name('department_fk');
             $table->foreignId('user_id')->constrained()->index();
             $table->smallInteger('is_active')->default(1);
+<<<<<<< HEAD
 
+=======
+            $table->timestamps();
+>>>>>>> 61b4e6da66c3b6b1fb9dff94fa32534d860f9021
         });
     }
 

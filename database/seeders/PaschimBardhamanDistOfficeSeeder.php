@@ -1,0 +1,28 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Codemaster;
+use App\Models\OfficeMaster;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class PaschimBardhamanDistOfficeSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        OfficeMaster::create([
+            'name' => 'Paschim Bardhaman Dist Office',
+            'address' => 'PaschimBardhaman,WesBengal',
+            'zip' => '713422',
+            'office_type' => Codemaster::where('short_name', 'district_office')->firstOrFail()->id,
+            'state_id' => '19',
+            'district_id' => '704',
+            
+            
+        ]);
+    }
+}
