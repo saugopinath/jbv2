@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             SchemeSeeder::class, 
             CodemasterSeeder::class, 
             BankSeeder::class, 
-            IfscSeeder::class, 
+            IfscSeeder::class,
         ]);
     }
 }

@@ -12,4 +12,8 @@ class JaiBanglaForm extends Page
     protected static ?string $navigationLabel = 'Jai Bangla Form';
     protected static ?string $slug = 'jai-bangla-form';
     protected static ?string $title = '';
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/featured-multilevelmenu
