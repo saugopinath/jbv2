@@ -9,13 +9,17 @@ use App\Models\Codemaster;
 use App\Models\District;
 use App\Models\OfficeMaster;
 use App\Models\Subdivision;
+use Dom\Text;
 use Filament\Forms;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -32,21 +36,32 @@ class OfficeMasterResource extends Resource
     public static function form(Form $form): Form
     {
         //dd(District::where('state_id','19')->pluck('name', 'id')->toArray());
-        //dd( Codemaster::where('parent_id', Codemaster::where('short_name', 'office_type')->value('id'))
-        // ->pluck('name', 'id')->toArray());
+        // dd( Codemaster::where('parent_id', Codemaster::where('short_name', 'office_type')->value('id'))
+        // ->pluck('short_name', 'id')->toArray());
         //dd( Block::where('district_id','306')->pluck('name', 'id'));
 
         return $form
 
             ->schema([
+                Hidden::make('state_id') 
+                ->default(19),  
+                
                 Select::make('office_type')
                 ->label('Office Type')
                 ->options(fn () => Codemaster::where('parent_id', Codemaster::where('short_name', 'office_type')->value('id'))->pluck('name', 'id'))
+                // ->afterStateUpdated(fn (Set $set, Get $get) => dd('Selected Office Type:', $get('office_type')))
+                ->afterStateUpdated(function (Set $set) {
+                    $set('district_id', null);
+                    $set('block_id', null);
+                    $set('subdivisions_id', null);})
+
                 ->required()
                 ->reactive() ,
+
             TextInput::make('name')
                 ->required()
                 ->maxLength(255),
+
             TextInput::make('address')
                 ->required()
                 ->maxLength(255),
@@ -59,7 +74,24 @@ class OfficeMasterResource extends Resource
                 ->options(District::where('state_id', '19')->pluck('name', 'id'))
                 ->required()
                 ->reactive()
-                ->afterStateUpdated(fn ($set) => $set('block_id', null)), // Clears block selection
+                ->afterStateUpdated(function (Set $set) {
+                    $set('block_id', null);
+                    $set('subdivisions_id', null);}) 
+                ->hidden(fn (Get $get) =>empty($get('office_type')) || !in_array(
+                    Codemaster::where('id', $get('office_type'))->value('name') ?? '',['BLOCK OFFICE', 'DISTRICT OFFICE', 'SUBDIVISION OFFICE']
+                    )
+                ),
+
+                // ->hidden(fn (Get $get) => 
+                // !in_array(
+                //     Codemaster::where('id', $get('office_type'))->value('name'), 
+                //     [ 'BLOCK OFFICE', 'DISTRICT OFFICE', 'SUBDIVISION OFFICE']
+                //     )
+                // ), 
+                // ->hidden(fn (Get $get) => 
+                //     Codemaster::where('id', $get('office_type'))->value('name') !== 'DISTRICT OFFICE' 
+                //     ),
+                // ->hidden(fn (Get $get) => $get('office_type') == 'STATE OFFICE'),// Hide for state
             
             Select::make('block_id')
                 ->label('Block Name')
@@ -68,13 +100,16 @@ class OfficeMasterResource extends Resource
                     : [])
                 ->required()
                 ->reactive()
+                ->hidden(fn (Get $get) =>empty($get('office_type')) || Codemaster::where('id', $get('office_type'))->value('name') !== 'BLOCK OFFICE' )
                 ->disabled(fn ($get) => !$get('district_id')),
+
             select::make('subdivisions_id')
                 ->label('Subdivision Name')
                 ->options(fn ($get) => $get('district_id')? Subdivision::where('district_id', $get('district_id'))
                 ->pluck('name', 'id'): [])
                 ->required()
                 ->reactive() 
+                ->hidden(fn (Get $get) =>empty($get('office_type')) ||Codemaster::where('id', $get('office_type'))->value('name') !== 'SUBDIVISION OFFICE' )
                 ->disabled(fn (Get $get) => !$get('district_id')),
 
 
@@ -98,13 +133,33 @@ class OfficeMasterResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('id')
+                ->label('ID')
+                ->sortable()
+                ->state(fn ($rowLoop) => $rowLoop->index + 1),
+
+                TextColumn::make('name')
+                ->label('Name')
+                ->sortable()
+                ->searchable(),
+
+                TextColumn::make('address')
+                ->label('Address')
+                ->sortable()
+                ->searchable(),
+
+                TextColumn::make('office_type') 
+                ->label('Office Type')
+                ->sortable()
+                ->default('NULL'),
+
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
