@@ -14,18 +14,22 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            LGD\StateSeeder::class, 
-            LGD\DistrictSeeder::class, 
-            LGD\BlockSeeder::class, 
-            LGD\PanchayatSeeder::class, 
-            LGD\SubdivisionSeeder::class, 
-            LGD\MunicipalitiesSeeder::class, 
+            LGD\StateSeeder::class,
+            LGD\DistrictSeeder::class,
+            LGD\BlockSeeder::class,
+            LGD\PanchayatSeeder::class,
+            LGD\SubdivisionSeeder::class,
+            LGD\MunicipalitiesSeeder::class,
             LGD\WardSeeder::class,
-            DepartmentSeeder::class, 
-            SchemeSeeder::class, 
-            CodemasterSeeder::class, 
-            BankSeeder::class, 
+            DepartmentSeeder::class,
+            SchemeSeeder::class,
+            CodemasterSeeder::class,
+            BankSeeder::class,
             IfscSeeder::class,
+            AdminSeeder::class,
+            ApplicantSeeder::class,
+           // BenIncompletDetailsSeeder::class,
+            IncompletDetailsSeeder::class,
         ]);
     }
 }

@@ -65,7 +65,6 @@ class CodemasterSeeder extends Seeder
                 "name" => "Relationship",
                 "short_name" => "relationship",
             ),
-            
         );
         foreach ($codemasterParents as $codemasterParent_item) {
             Codemaster::create([

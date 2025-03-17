@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/feature_incomplet_details
 use App\Models\User;
 use App\Models\UserPersonal;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -17,14 +20,16 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-       $user=User::create([
+        $user = User::create([
             'name' => 'Admin',
-            'mobile_no' => '1234567890',
+            'mobile_no' => '0123456789',
             'email' => 'admin@gmail.com',
-            'password' => Hash::make('admin123'),
-       ]);
-       UserPersonal::create([
+            'password' => Hash::make('1234'),
+        ]);
+
+        UserPersonal::create([
             'user_id' => $user->id,
+<<<<<<< HEAD
             'name'=>$user->name,
        ]);
 =======
@@ -49,5 +54,9 @@ class AdminSeeder extends Seeder
             'name' => $user->name,
         ]);
 >>>>>>> origin/featured-multilevelmenu
+=======
+            'name' => $user->name,
+        ]);
+>>>>>>> origin/feature_incomplet_details
     }
 }

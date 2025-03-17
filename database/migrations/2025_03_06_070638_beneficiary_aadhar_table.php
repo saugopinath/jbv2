@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -282,7 +283,7 @@ DB::statement("ALTER TABLE public.beneficiary_aadhaars
     ADD CONSTRAINT fk_beneficiary_aadhaars_serial FOREIGN KEY (ben_id)
     REFERENCES public.beneficiary_idserials (id) MATCH SIMPLE
     ON UPDATE NO ACTION
-    ON DELETE NO ACTION"); 
+    ON DELETE NO ACTION");
 
 DB::statement("ALTER TABLE public.beneficiary_aadhaars ADD CONSTRAINT fk_beneficiary_aadhaars_scheme FOREIGN KEY (scheme_id)
 REFERENCES public.schemes (id) MATCH SIMPLE
