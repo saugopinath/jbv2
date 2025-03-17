@@ -9,6 +9,6 @@ class Scheme extends Model
 {
     public function mainTables()
     {
-        return $this->hasMany(IncompleteBenList::class);
+        return $this->belongsTo(IncompleteBenList::class,'scheme_id','id');
     }
 }

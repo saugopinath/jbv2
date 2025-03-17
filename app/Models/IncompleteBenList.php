@@ -11,16 +11,16 @@ class IncompleteBenList extends Model
 {
     public function beneficiaryIdserial()
     {
-        return $this->belongsTo(BeneficiaryIdserial::class);
+        return $this->belongsTo(BeneficiaryIdserial::class,'ben_id','id');
     }
 
     public function scheme()
     {
-        return $this->belongsTo(Scheme::class);
+        return $this->belongsTo(Scheme::class,'scheme_id','id');
     }
 
     public function codemaster()
     {
-        return $this->belongsTo(Codemaster::class);
+        return $this->belongsTo(Codemaster::class,'incomplete_type','id');
     }
 }

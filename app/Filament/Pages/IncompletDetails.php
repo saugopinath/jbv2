@@ -26,7 +26,7 @@ class IncompletDetails extends Page
     {
         $this->codemaster = $this->getDropdownOptions();
         //   $this->applications = BeneficiaryPersonal::all();
-         $this->applications = IncompleteBenList::with(['beneficiaryIdserial', 'scheme', 'codemaster'])->get();
+         $this->applications = IncompleteBenList::with([ 'codemaster','scheme'])->get();
 
          dd($this->applications);
     }
