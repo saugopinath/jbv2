@@ -15,8 +15,8 @@ class CreateCodeMaster extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
         {
-            if (!empty($data['is_parent'])) { // If is_parent is checked
-                $data['parent_id'] = null; // Set parent_id to NULL
+            if (!empty($data['is_parent'])) { 
+                $data['parent_id'] = null; 
             }
 
             return $data;
