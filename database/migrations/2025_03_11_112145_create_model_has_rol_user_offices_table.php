@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('model_has_rol_user_office_mappings', function (Blueprint $table) {
+        Schema::create('user_office_mappings', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('office_id');
-            $table->unsignedSmallInteger('user_scheme_id');
-            $table->foreign('user_id')->references('id')->on('users')->name('user_id_fk');
-            $table->foreign('office_id')->references('id')->on('office_masters')->name('office_id_fk');
-            $table->foreign('user_scheme_id')->references('id')->on('user_scheme_mappings')->name('user_scheme_id_fk');
+            $table->bigInteger('user_id');
+            $table->bigInteger('office_id');
+            $table->foreign('user_id','user_id_fk')->references('id')->on('users');
+            $table->foreign('office_id','office_id_fk')->references('id')->on('office_masters');
             $table->smallInteger('is_active')->default(1);
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('model_has_rol_user_office_mappings');
+        Schema::dropIfExists('user_office_mappings');
     }
 };

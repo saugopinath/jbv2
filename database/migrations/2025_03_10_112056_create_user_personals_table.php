@@ -13,19 +13,15 @@ return new class extends Migration
     {
         Schema::create('user_personals', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id');
+            $table->foreign('user_id', 'user_id_fk')->references('id')->on('users');
             $table->string('name');
             $table->string('full_name_as_in_aadhar')->nullable();
             $table->string('picture')->nullable();
             $table->date('date_hired')->nullable();
-            $table->unsignedSmallInteger('department_id')->nullable();
-            $table->foreign('department_id')->references('id')->on('departments')->name('department_fk');
-            $table->foreignId('user_id')->constrained()->index();
+            $table->smallInteger('department_id')->nullable();
+            $table->foreign('department_id', 'department_id_fk')->references('id')->on('departments');
             $table->smallInteger('is_active')->default(1);
-<<<<<<< HEAD
-
-=======
-            $table->timestamps();
->>>>>>> 61b4e6da66c3b6b1fb9dff94fa32534d860f9021
         });
     }
 

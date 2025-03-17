@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('user_scheme_mappings', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedSmallInteger('scheme_id');
-            $table->foreign('scheme_id')->references('id')->on('schemes')->name('scheme_id_fk');
-            $table->foreignId('user_id')->constrained()->index();
+            $table->bigInteger('user_id');
+            $table->smallInteger('scheme_id');
+            $table->foreign('scheme_id','scheme_id_fk')->references('id')->on('schemes');
+            $table->foreign('user_id','user_id_fk')->references('id')->on('users');
             $table->smallInteger('is_active')->default(1);
         });
     }

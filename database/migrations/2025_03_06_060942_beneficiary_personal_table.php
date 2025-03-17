@@ -323,6 +323,7 @@ DB::statement("ALTER TABLE public.beneficiary_personals ADD CONSTRAINT fk_benefi
       REFERENCES public.codemasters (id) MATCH SIMPLE
       ON UPDATE NO ACTION
       ON DELETE NO ACTION");
+     
     }
 
     /**

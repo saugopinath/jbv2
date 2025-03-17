@@ -22,7 +22,8 @@ return new class extends Migration
     is_clean smallint default 1,
     lb_application_id integer,
     aadhar_hash character varying(200),
-    created_at timestamp without time zone
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 ) PARTITION BY LIST (scheme_id)");
 
 DB::statement("CREATE TABLE public.beneficiary_aadhaars_1 PARTITION OF public.beneficiary_aadhaars

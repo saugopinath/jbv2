@@ -10,16 +10,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    
+     public function up(): void
     {
-        DB::statement('CREATE TABLE public.beneficiary_idserials(id serial,CONSTRAINT beneficiary_idserials_pkey PRIMARY KEY (id))');
+        Schema::create('beneficiary_idserials', function (Blueprint $table) {
+            $table->id();
+           
+            $table->timestamps();
+        });
     }
+     
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('public.beneficiary_idserials');
+        Schema::dropIfExists('beneficiary_idserials');
     }
 };
