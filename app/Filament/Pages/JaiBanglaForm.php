@@ -7,12 +7,16 @@ use Filament\Pages\Page;
 class JaiBanglaForm extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
-
     protected static string $view = 'filament.pages.jai-bangla-form';
-    protected static ?string $navigationLabel = 'Jai Bangla Form';
     protected static ?string $slug = 'jai-bangla-form';
+<<<<<<< HEAD
     protected static ?string $title = '';
 <<<<<<< HEAD
+=======
+    // protected static ?string $navigationLabel = 'Jai Bangla Form';
+    // protected static ?string $navigationGroup = 'JB';
+    // protected static ?string $title = '';
+>>>>>>> origin/featured-applicantentry
 }
 =======
 }
