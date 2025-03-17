@@ -24,12 +24,18 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             SchemeSeeder::class,
             CodemasterSeeder::class,
+            CodemasterIOSeeder::class,
             BankSeeder::class,
             IfscSeeder::class,
+            IncompletDetailsSeeder::class,
             AdminSeeder::class,
             ApplicantSeeder::class,
            // BenIncompletDetailsSeeder::class,
-            IncompletDetailsSeeder::class,
+           
+            RoleSeeder::class,
+            AsansolSuvdivisionOfficeSeeder::class,
+            PaschimBardhamanDistOfficeSeeder::class,
+            PurbaBardhamanDistOfficeSeeder::class,
         ]);
     }
 }

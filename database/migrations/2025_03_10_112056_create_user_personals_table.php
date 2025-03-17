@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('date_hired')->nullable();
             $table->smallInteger('department_id')->nullable();
             $table->foreign('department_id', 'department_id_fk')->references('id')->on('departments');
+            $table->timestamps();
             $table->smallInteger('is_active')->default(1);
         });
     }
