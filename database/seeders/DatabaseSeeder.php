@@ -30,8 +30,7 @@ class DatabaseSeeder extends Seeder
             IncompletDetailsSeeder::class,
             AdminSeeder::class,
             ApplicantSeeder::class,
-           // BenIncompletDetailsSeeder::class,
-           
+            IncompleteBenListsSeeder::class,
             RoleSeeder::class,
             AsansolSuvdivisionOfficeSeeder::class,
             PaschimBardhamanDistOfficeSeeder::class,

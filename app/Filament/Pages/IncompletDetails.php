@@ -2,8 +2,10 @@
 
 namespace App\Filament\Pages;
 
-use App\Models\Codemaster;
 use Filament\Pages\Page;
+use App\Models\Codemaster;
+use App\Models\IncompleteBenList;
+use App\Models\BeneficiaryPersonal;
 
 class IncompletDetails extends Page
 {
@@ -18,10 +20,15 @@ class IncompletDetails extends Page
     protected static string $view = 'filament.pages.incomplet-details';
 
     public array $codemaster = [];
+    public $applications;
 
     public function mount()
     {
         $this->codemaster = $this->getDropdownOptions();
+        //   $this->applications = BeneficiaryPersonal::all();
+         $this->applications = IncompleteBenList::with(['beneficiaryIdserial', 'scheme', 'codemaster'])->get();
+
+         dd($this->applications);
     }
     public function getDropdownOptions(): array
     {

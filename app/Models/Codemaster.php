@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\IncompleteBenList;
 use Illuminate\Database\Eloquent\Model;
 
 class Codemaster extends Model
@@ -14,5 +15,10 @@ class Codemaster extends Model
     public function parent()
     {
         return $this->belongsTo(Codemaster::class, 'parent_id');
+    }
+
+    public function mainTables()
+    {
+        return $this->hasMany(IncompleteBenList::class);
     }
 }
