@@ -3,9 +3,8 @@
     @foreach($options as $id => $name)
         <option value="{{ $id }}">{{ $name }}</option>
     @endforeach
-<<<<<<< HEAD
-</select>
-=======
+
 </select>
 
->>>>>>> origin/featured-multilevelmenu
+
+
