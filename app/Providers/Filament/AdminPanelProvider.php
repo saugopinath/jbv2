@@ -17,7 +17,8 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-
+use Filament\SpatieLaravelTranslatablePlugin;
+use LaraZeus\Bolt\BoltPlugin;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -54,7 +55,9 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])->plugins([
-                \EightyNine\Approvals\ApprovalPlugin::make()
+                \EightyNine\Approvals\ApprovalPlugin::make(),
+                SpatieLaravelTranslatablePlugin::make()->defaultLocales([config('app.locale')]),
+                BoltPlugin::make()
             ]);
     }
 }

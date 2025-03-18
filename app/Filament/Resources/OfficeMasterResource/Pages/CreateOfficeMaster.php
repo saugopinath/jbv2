@@ -9,6 +9,11 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateOfficeMaster extends CreateRecord
 {
     protected static string $resource = OfficeMasterResource::class;
+    
+    protected function getRedirectUrl(): string
+        {
+            return $this->getResource()::getUrl('index');
+        }
     // protected function mutateFormDataBeforeCreate(array $data): array
     // {
 

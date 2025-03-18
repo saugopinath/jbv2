@@ -148,10 +148,22 @@ class OfficeMasterResource extends Resource
                 ->sortable()
                 ->searchable(),
 
-                TextColumn::make('office_type') 
+                TextColumn::make('officeType.name') 
                 ->label('Office Type')
                 ->sortable()
-                ->default('NULL'),
+                ->default(''),
+                TextColumn::make('district.name') 
+                ->label('District Name')
+                ->sortable()
+                ->default(''),
+                TextColumn::make('block.name') 
+                ->label('Block Name')
+                ->sortable()
+                ->default(''),
+                TextColumn::make('subdivision.name')
+                ->label('Subdivision Name')
+                ->sortable()
+                ->default(''),
 
             ])
             ->filters([
