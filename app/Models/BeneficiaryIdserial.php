@@ -8,9 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class BeneficiaryIdserial extends Model
 {
 
-    public function mainTables()
+    public function incompletList()
     {
         return $this->hasMany(IncompleteBenList::class,'ben_id','id');
+    }
+
+    public function beneficiaryPersonal()
+    {
+        return $this->belongsTo(BeneficiaryPersonal::class,'ben_id','id');
     }
 
     protected $guarded = [

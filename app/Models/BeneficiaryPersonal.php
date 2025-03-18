@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class BeneficiaryPersonal extends Model
 {
 
-    public function beneficiaryPersonal()
+    public function beneficiaryIdserial()
     {
         return $this->belongsTo(BeneficiaryIdserial::class,'ben_id','id');
     }

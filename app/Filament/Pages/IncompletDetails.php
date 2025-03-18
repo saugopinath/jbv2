@@ -26,12 +26,17 @@ class IncompletDetails extends Page
     public function mount()
     {
         $this->codemaster = $this->getDropdownOptions();
-         $this->beneficiaryPersonal = BeneficiaryPersonal::get();
-         $this->applications = IncompleteBenList::with(['scheme','codemaster'])
-         ->get();
 
+        //   $this->beneficiaryPersonal = BeneficiaryPersonal::with('beneficiaryIdserial')->get();
 
+         $this->beneficiaryPersonal = BeneficiaryPersonal::with('beneficiaryIdserial.incompletList.codemaster')->where('is_active',1)->get();
+
+        //  $this->applications = IncompleteBenList::with(['scheme','codemaster','beneficiaryIdserial'])
+        //  ->get();
+
+        // dd($this->beneficiaryPersonal);
     }
+
     public function getDropdownOptions(): array
     {
         return Codemaster::where('parent_id', 79)->pluck('name', 'id')->toArray();

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Scheme extends Model
 {
-    public function mainTables()
+    public function incompletList()
     {
         return $this->hasMany(IncompleteBenList::class,'scheme_id','id');
     }

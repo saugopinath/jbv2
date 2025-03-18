@@ -17,7 +17,7 @@ class Codemaster extends Model
         return $this->belongsTo(Codemaster::class, 'parent_id');
     }
 
-    public function mainTables()
+    public function incompletList()
     {
         return $this->hasMany(IncompleteBenList::class, 'incomplete_type', 'id');
     }
