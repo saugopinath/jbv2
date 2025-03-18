@@ -31,10 +31,20 @@ class IncompletDetails extends Page
 
          $this->beneficiaryPersonal = BeneficiaryPersonal::with('beneficiaryIdserial.incompletList.codemaster')->where('is_active',1)->get();
 
+         foreach ($this->beneficiaryPersonal as $beneficiary) {
+            $tooltipContent = '';
+
+            foreach ($beneficiary->beneficiaryIdserial->incompletList as $incomplete) {
+                $tooltipContent .= $incomplete->codemaster->name . '  ,  ';
+            }
+            // Store tooltip content back to each beneficiary (for use in the view)
+            $beneficiary->tooltipContent = rtrim($tooltipContent, ' ,');
+        }
+        // dd($this->beneficiaryPersonal );
         //  $this->applications = IncompleteBenList::with(['scheme','codemaster','beneficiaryIdserial'])
         //  ->get();
 
-        // dd($this->beneficiaryPersonal);
+
     }
 
     public function getDropdownOptions(): array

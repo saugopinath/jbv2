@@ -73,12 +73,11 @@
                     <td class="px-4 py-2 border"></td>
                     <td class="px-4 py-2 border"></td>
                     <td class="px-4 py-2 border">
-                        @foreach ($beneficiary->beneficiaryIdserial->incompletList as $incomplete)
-                            <x-filament::button data-tooltip="{{ $incomplete->codemaster->name }}"
-                                class="bg-blue-500 text-white">
-                                View
-                            </x-filament::button>
-                        @endforeach
+
+                        <x-filament::button x-data="{}" x-tooltip.raw="{{ $beneficiary->tooltipContent }}"
+                            class="bg-blue-500 text-white">
+                            View
+                        </x-filament::button>
                     </td>
                     <td class="px-4 py-2 border"></td>
                 </tr>
