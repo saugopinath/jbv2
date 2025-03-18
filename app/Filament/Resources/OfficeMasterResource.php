@@ -53,14 +53,20 @@ class OfficeMasterResource extends Resource
                 ->afterStateUpdated(function (Set $set) {
                     $set('district_id', null);
                     $set('block_id', null);
-                    $set('subdivisions_id', null);})
-
+                    $set('subdivisions_id', null);
+                    $set('name', null);
+                    
+                })
                 ->required()
                 ->reactive() ,
 
-            TextInput::make('name')
-                ->required()
-                ->maxLength(255),
+            // TextInput::make('name')
+            //     ->required()
+            //     ->maxLength(255)
+            //     ->unique(OfficeMaster::class, 'name')
+            //         ->validationMessages([
+            //             'unique' => 'The :attribute has already been registered.',
+            //         ]),
 
             TextInput::make('address')
                 ->required()
@@ -74,13 +80,21 @@ class OfficeMasterResource extends Resource
                 ->options(District::where('state_id', '19')->pluck('name', 'id'))
                 ->required()
                 ->reactive()
-                ->afterStateUpdated(function (Set $set) {
+                ->afterStateUpdated(function (Set $set,Get $get) {
                     $set('block_id', null);
-                    $set('subdivisions_id', null);}) 
+                    $set('subdivisions_id', null);
+                    
+                    if (Codemaster::where('id', $get('office_type'))->value('name') === 'DISTRICT OFFICE') {
+                        if( $get('district_id')!=null){
+                        $district = District::where('id', $get('district_id'))->value('name');
+                        $set('name', $district ? $district . ' _ DISTRICT OFFICE' : '');}
+                        else{
+                            $set('name', null);
+                        }
+                    }
+                }) 
                 ->hidden(fn (Get $get) =>empty($get('office_type')) || !in_array(
-                    Codemaster::where('id', $get('office_type'))->value('name') ?? '',['BLOCK OFFICE', 'DISTRICT OFFICE', 'SUBDIVISION OFFICE']
-                    )
-                ),
+                    Codemaster::where('id', $get('office_type'))->value('name') ?? '',['BLOCK OFFICE', 'DISTRICT OFFICE', 'SUBDIVISION OFFICE'])),
 
                 // ->hidden(fn (Get $get) => 
                 // !in_array(
@@ -95,11 +109,22 @@ class OfficeMasterResource extends Resource
             
             Select::make('block_id')
                 ->label('Block Name')
-                ->options(fn ($get) => $get('district_id') 
-                    ? Block::where('district_id', $get('district_id'))->pluck('name', 'id') 
-                    : [])
+                ->options(fn ($get) => $get('district_id') ? Block::where('district_id', $get('district_id'))->pluck('name', 'id') : [])
                 ->required()
                 ->reactive()
+                ->afterStateUpdated(function (Set $set, Get $get) {
+                    // $set('name', null);
+                    if (Codemaster::where('id', $get('office_type'))->value('name') === 'BLOCK OFFICE') {
+                        if( $get('block_id')!=null){
+                        $block = Block::where('id', $get('block_id'))->value('name');
+                        $set('name', $block ? $block . ' _ BLOCK OFFICE' : '');
+                        }
+                        else{
+                            $set('name', null);
+                        }
+                    }
+                })
+    
                 ->hidden(fn (Get $get) =>empty($get('office_type')) || Codemaster::where('id', $get('office_type'))->value('name') !== 'BLOCK OFFICE' )
                 ->disabled(fn ($get) => !$get('district_id')),
 
@@ -109,6 +134,19 @@ class OfficeMasterResource extends Resource
                 ->pluck('name', 'id'): [])
                 ->required()
                 ->reactive() 
+                ->afterStateUpdated(function (Set $set, Get $get) {
+                    // $set('name', null);
+                    if (Codemaster::where('id', $get('office_type'))->value('name') === 'SUBDIVISION OFFICE') {
+                        if( $get('subdivisions_id')!=null){
+                        $subdivision = Subdivision::where('id', $get('subdivisions_id'))->value('name');
+                        $set('name', $subdivision ? $subdivision . ' _ SUBDIVISION OFFICE' : '');
+                        }
+                        else{
+                            $set('name', null);
+                        }
+                    }
+                })
+    
                 ->hidden(fn (Get $get) =>empty($get('office_type')) ||Codemaster::where('id', $get('office_type'))->value('name') !== 'SUBDIVISION OFFICE' )
                 ->disabled(fn (Get $get) => !$get('district_id')),
 
@@ -125,7 +163,18 @@ class OfficeMasterResource extends Resource
             //     ->required()
             //     ->reactive() 
             //     ->disabled(fn (Get $get) => !$get('district_id')),
-
+            TextInput::make('name')
+            ->required()
+            ->maxLength(255)
+            ->unique(OfficeMaster::class, 'name')
+                ->validationMessages([
+                    'unique' => 'The :attribute has already been registered.',
+                ])
+            ->live()
+            ->hidden(fn (Get $get) => empty($get('office_type')))
+            ->disabled(fn (Get $get) => in_array(Codemaster::where('id', $get('office_type'))->value('name'), ['DISTRICT OFFICE', 'BLOCK OFFICE', 'SUBDIVISION OFFICE']))
+            ->dehydrated(true),
+            // ->afterStateUpdated(fn (Set $set, Get $get) => dd('Selected Office Type:', $get('office_type'))),
             ]);
     }
 
