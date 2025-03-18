@@ -5,8 +5,11 @@ use Filament\Forms;
 
 use App\Models\User;
 use Filament\Tables;
+use App\Models\Scheme;
 use Filament\Forms\Form;
+use App\Models\Codemaster;
 use Filament\Tables\Table;
+use App\Models\OfficeMaster;
 use Filament\Resources\Resource;
 use Illuminate\Support\HtmlString;
 use Spatie\Permission\Models\Role;
@@ -15,6 +18,7 @@ use Filament\Forms\Components\Wizard;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ViewField;
 use Illuminate\Database\Eloquent\Builder;
+use App\Forms\Components\SchemeDropdownField;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\RelationManagers;
@@ -61,28 +65,48 @@ class UserResource extends Resource
                             ->minLength(10)
                             ->maxLength(10),
 
-
                         ]),
 
 
+                        Wizard\Step::make('Role & Scheme')
+                        ->schema([
+                            Select::make('role_id')
+                                ->label('Select Role')
+                                ->options(fn () => Role::pluck('name', 'id')->toArray())
+                                ->searchable(),
 
+                            Select::make('scheme_id')
 
-                            Wizard\Step::make('Role')
-                            ->schema([
-                                Select::make('role_id')
-                                    ->label('Select Role')
-                                    ->options(Role::pluck('name', 'id')->toArray())
-                                    ->searchable()
-                                    // ->required(),
-                            ]),
-
-
+                                ->label('Scheme')
+                                ->options(fn () => Scheme::where('is_active', 1)->pluck('name', 'id')->toArray())
+                                ->searchable()
+                                // ->required(),
+                        ]),
 
 
                     Wizard\Step::make('Office')
-                        ->schema([
-                            // ...
-                        ]),
+                    ->schema([
+
+                        Select::make('office_type')
+                            ->label('Office Type')
+                            ->options(fn () => Codemaster::where('parent_id', 80)->pluck('name', 'id')->toArray())
+                            ->searchable()
+                            ->reactive()
+                            ->live(),
+
+
+                        Select::make('office_id')
+                            ->label('Office Name')
+                            ->options(fn (callable $get) =>
+                                OfficeMaster::where('office_type', $get('office_type'))
+                                    ->pluck('name', 'id')
+                                    ->toArray()
+                            )
+                            ->searchable()
+                            ->reactive(),
+                    ])
+
+
                 ])
             ]);
     }

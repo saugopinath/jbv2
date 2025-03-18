@@ -15,7 +15,7 @@ class OfficeMaster extends Model
         'district_id',
         'block_id',
         'subdivision_id',
-        'state_id',
+        // 'state_id',
     ];
-    
+
 }

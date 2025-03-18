@@ -22,6 +22,11 @@ class SchemeSelectionDropdown extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.scheme-selection-dropdown');
+        // return view('components.scheme-selection-dropdown');
+
+        return view('components.scheme-selection-dropdown', [
+            'options' => $this->options,
+        ]);
+
     }
 }
