@@ -10,8 +10,9 @@ class BeneficiaryPersonal extends Model
 
     public function beneficiaryPersonal()
     {
-        return $this->belongsTo(BeneficiaryIdserial::class,'id','ben_id');
+        return $this->belongsTo(BeneficiaryIdserial::class,'ben_id','id');
     }
+
 
     protected $guarded = [
         'id',

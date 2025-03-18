@@ -9,10 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class IncompleteBenList extends Model
 {
-    public function beneficiaryIdserial()
-    {
-        return $this->belongsTo(BeneficiaryIdserial::class,'ben_id','id');
-    }
 
     public function scheme()
     {
@@ -23,4 +19,5 @@ class IncompleteBenList extends Model
     {
         return $this->belongsTo(Codemaster::class,'incomplete_type','id');
     }
+
 }

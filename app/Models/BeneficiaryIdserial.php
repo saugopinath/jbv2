@@ -10,7 +10,7 @@ class BeneficiaryIdserial extends Model
 
     public function mainTables()
     {
-        return $this->belongsTo(IncompleteBenList::class,'ben_id','id');
+        return $this->hasMany(IncompleteBenList::class,'ben_id','id');
     }
 
     protected $guarded = [

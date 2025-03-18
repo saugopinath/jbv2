@@ -21,14 +21,16 @@ class IncompletDetails extends Page
 
     public array $codemaster = [];
     public $applications;
+    public $beneficiaryPersonal;
 
     public function mount()
     {
         $this->codemaster = $this->getDropdownOptions();
-        //   $this->applications = BeneficiaryPersonal::all();
-         $this->applications = IncompleteBenList::with([ 'codemaster','scheme'])->get();
+         $this->beneficiaryPersonal = BeneficiaryPersonal::get();
+         $this->applications = IncompleteBenList::with(['scheme','codemaster'])
+         ->get();
 
-         dd($this->applications);
+
     }
     public function getDropdownOptions(): array
     {
