@@ -1,22 +1,14 @@
 <x-filament::page>
-    {{-- <h2 class="text-xl font-bold mb-4">
-        Selected Scheme: {{ $scheme?->name ?? 'No Scheme Selected' }}
-    </h2> --}}
-
-    <form method="POST" action="">
-        @csrf
-        <input type="hidden" name="scheme_id" value="{{ request()->scheme_id }}">
-
-        <div class="mb-4">
-            <label class="block text-gray-700">Enter Your Name:</label>
-            <input type="text" name="name" class="w-full p-2 border rounded-lg">
+    <div class="p-6">
+        {{-- <h2 class="text-2xl font-semibold">Scheme Registration</h2>
+        <p class="text-gray-500">Complete the form below to register a new scheme.</p> --}}
+        <div class="mt-6">
+            {{ $this->form }}
         </div>
-
-        <div class="mb-4">
-            <label class="block text-gray-700">Enter Description:</label>
-            <textarea name="description" class="w-full p-2 border rounded-lg"></textarea>
-        </div>
-
-        <x-filament::button type="submit">Submit</x-filament::button>
-    </form>
+        {{-- <div class="mt-6">
+            <x-filament::button wire:click="save">
+                Submit
+            </x-filament::button>
+        </div> --}}
+    </div>
 </x-filament::page>
