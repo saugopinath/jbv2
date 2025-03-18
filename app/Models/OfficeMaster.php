@@ -14,8 +14,25 @@ class OfficeMaster extends Model
         'state_id',
         'district_id',
         'block_id',
-        'subdivision_id',
+        'subdivisions_id',
         'state_id',
     ];
-    
+    public function officeType()
+    {
+        return $this->belongsTo(Codemaster::class, 'office_type', 'id');
+    }
+
+        public function district()
+    {
+        return $this->belongsTo(District::class, 'district_id', 'id');
+    }
+    public function block()
+    {
+        return $this->belongsTo(Block::class, 'block_id', 'id');
+    }
+    public function subdivision()
+    {
+        return $this->belongsTo(Subdivision::class, 'subdivisions_id', 'id');
+    }
+
 }
